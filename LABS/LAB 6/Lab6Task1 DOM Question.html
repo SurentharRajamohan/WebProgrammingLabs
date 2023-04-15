@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Apple Tours</title>
+    <!-- Q1(iii) add a new CSS class -->
+<style>
+    .blueFontColor {
+        color:blue;
+    }
+
+    .dashedBlueBorder {
+        border: 5px darkblue dashed;
+
+    }
+
+</style>
+
+</head>
+<body>
+    <div id="main">
+        <h1>Hello <span id="there">there</span></h1>
+        <h1>Welcome to Apple!</h1>
+        <p>We provide the tours to these countries:</p>
+        <ul>
+           <li>France</li>
+           <li>Spain</li>
+           <li>Thailand</li>
+        </ul>  
+        <a href="" class="special"><button type="button">Book Tour</button></a>  
+    </div>
+    
+<script>
+  
+    //Q1(i) 
+    var li = document.querySelectorAll("li");
+    let i = 0;
+    while(i < li.length) {
+    
+        console.log(li.item(i).textContent);
+        i++;
+    }
+    
+    //Q1(ii)
+    var a = document.querySelector(".special");
+    a.addEventListener("mouseover", function(){
+        alert("Book a tour”");
+    })
+    
+    //Q1(iii) toggle a new class
+	//The toggle() class = Toggle between adding and removing a class name from a selected element with JavaScript.
+    var span = document.querySelector("#there");
+    span.classList.toggle("blueFontColor");
+    span.classList.toggle("dashedBlueBorder");
+
+
+
+    
+</script>
+</body>
+</html>
+

@@ -1,0 +1,22 @@
+/* section {
+    height: 100vh;  
+    background-size: cover;
+} */
+.cursive {
+    font-family: 'URW Chancery L', 'Brush Script MT', 'Brush Script Std', cursive;
+  }
+
+  .card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* add box shadow on hover */
+    
+    transform: scale(1.05);
+    transition: transform .2s;
+  }
+
+
+
+
+  
+
+
+ 
