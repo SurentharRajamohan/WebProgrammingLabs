@@ -1,11 +1,18 @@
 <?php
 include 'config.php';
 
+function checkPassword($password1, $password2): bool {
+    return ($password1 === $password2);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "GET"){
 
     $name = $_REQUEST["mName"];
     $email = $_REQUEST["mEmail"];
     $password = $_REQUEST["password"];
+    $rpassword = $_REQUEST["rpassword"];
+
+    $samePassword = checkPassword($password, $rpassword);
  
     $sql = "SELECT * FROM members WHERE email = '$email'";
 
@@ -13,11 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "GET")
 
     $registered = false;
 
-    if($result->num_rows == 0){
+    if($result->num_rows == 0 && $samePassword){
         try {
 
             $conn->begin_transaction();
-            $sql = "INSERT INTO members (name, email, password) VALUES ('$name', '$email', '$password')";
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO members (name, email, password) VALUES ('$name', '$email', '$hash')";
             $conn->query($sql);
             $registered = true;
             $conn->commit();
@@ -89,6 +97,11 @@ $registered = true;
     <?php
         if($registered){
                 echo ("<h2>Registered da eley</h2>");
+        }else if (!$samePassword){
+            echo ("<h2>Password did not match da dey</h2>");
+            echo ("<a href='signup.php'>Sign up da dey</a>");
+        
+        
         }else{
             echo ("<h2>Register aagale da eley, sign up again as email already exist</h2>");
             echo ("<a href='signup.php'>Sign up da dey</a>");
