@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "GET")
                 // Proceed with other operations or redirect the user
             } else {
                 echo "Invalid password!";
+                header("Location: login.php?action=login_failed");
             }
            
 

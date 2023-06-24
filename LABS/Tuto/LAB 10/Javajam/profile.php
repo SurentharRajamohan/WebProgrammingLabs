@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <link href="bootstrap.css" rel="stylesheet">
@@ -38,13 +28,13 @@
                             <a class="nav-link" href="jobs.html">Jobs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="signup.php">Sign Up</a>
+                            <a class="nav-link " href="signup.php">Sign Up</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="login.php">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="profile.php">Profile</a>
+                            <a class="nav-link active" href="profile.php">Profile</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="logout.php">Logout</a>
@@ -58,35 +48,52 @@
                 </div>
             </div>
         </nav>
-    <h1>Login Now or I will kill you</h1>
-    <p>Please login.</p>
-
-    <form method="POST" action="processLogin.php">
-        <div class="form-group">
-        
         <?php
-     try {  
-    $action = $_GET['action'];
-    if($action == "login_failed") {
-        echo '<p>Access denied.</p><br/><p>Incorrect username or password.</p>';
+        session_start();
+        include_once 'config.php';
+//
+        if (isset($_SESSION['logged_in'])  && $_SESSION['user_email'] && $_SESSION['logged_in']==true ){
+            // $id = $_SESSION['user_id'];
+            $email = $_SESSION['user_email'];
+
+            
+    $sql = "SELECT * FROM members WHERE email = '$email'";
+
+    $result = $conn->query($sql);
+
+    $row = $result->fetch_assoc();
+
+    $name = $row['Name'];
+    $email = $row['Email'];
+    
+    echo '<h1>Welcome to JavaJam Coffee House, ' .$name . '!</h1>';
+    
+    echo '<h2>Your Profile Information:</h2>';
+    echo '<table>';
+
+   
+    echo '<tr>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>';
+
+
+
+    echo '<tr>';
+    echo '<td>' . $name . '</td>';
+    echo '<td>' . $email . '</td>';
+    echo '</tr>';  
+
+    echo '</table>';
+      
+        }else{
+            echo '<h2>You bloody hacker. Sign up and login first</h2>';
         }
-    }catch(Exception $e){
+
         
-    }
         ?>
 
-            <label for="myEmail">*E-mail: </label> <br>
-            <input type="email" class="form-control col-sm-4" id="mEmail" name="mEmail" required="required"> <br>
-            
-                <label for="password">*Password:</label> <br>
-                <input class="form-control col-sm-4" id="password" name="password" type="password" required><br>
-            
-            
-            <br>
-                <input type="submit" class="btn btn-primary">
-        </div>
-    </form>
-
+   
 
 
     <script src="bootstrap.bundle.js"></script>

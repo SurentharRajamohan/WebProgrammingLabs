@@ -36,7 +36,7 @@
     let i = 0;
     while(i < li.length) {
     
-        console.log(li.item(i).textContent);
+        console.log(li[i].textContent);
         i++;
     }
     
@@ -49,9 +49,10 @@
     //Q1(iii) toggle a new class
 	//The toggle() class = Toggle between adding and removing a class name from a selected element with JavaScript.
     var span = document.querySelector("#there");
+    span.addEventListener("click", function(){
     span.classList.toggle("blueFontColor");
     span.classList.toggle("dashedBlueBorder");
-
+    });
 
 
     
